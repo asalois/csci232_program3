@@ -39,9 +39,9 @@ public class Main {
             for (int j = 0; j < dims; j++) {
                 for (int m = 0; m < dims; m++) {
                     if (s[j][m].equals("inf")) {
-                        System.out.print(" ∞ "); //
+                        System.out.format(" ∞ "); //
                     } else {
-                        System.out.print(" " + s[j][m] + " ");
+                        System.out.format(" %s ", s[j][m]);
                     }
                 }
                 System.out.println();
