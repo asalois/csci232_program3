@@ -38,10 +38,10 @@ public class Main {
             }
             for (int j = 0; j < dims; j++) {
                 for (int m = 0; m < dims; m++) {
-                    if(s[j][m].equals("inf")){
-                        System.out.print("∞ ");
-                    }else {
-                        System.out.print(s[j][m] + " ");
+                    if (s[j][m].equals("inf")) {
+                        System.out.print(" ∞ ");
+                    } else {
+                        System.out.print(" " + s[j][m] + " ");
                     }
                 }
                 System.out.println();
