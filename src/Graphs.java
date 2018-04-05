@@ -6,7 +6,7 @@ public class Graphs {
 
     }
 
-    public void Prims(String inArray[][]){
-        PriorityQueue<String> pQ = new PriorityQueue<String>();
+    public void Prims(int inArray[][]){
+        PriorityQueue<Integer> pQ = new PriorityQueue<Integer>();
     }
 }
