@@ -1,3 +1,4 @@
+/*
 public class Graphs {
 
     public void Prims(inArray[][]){
@@ -6,3 +7,4 @@ public class Graphs {
         }
     }
 }
+*/

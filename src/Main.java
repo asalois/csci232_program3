@@ -26,7 +26,7 @@ public class Main {
             String[][] s = new String[dims][dims];
             while (((line = r.readLine()) != null) && k < 6) {
                 int i;
-                String[] csv = line.split("[,\\s]+"); // Reads line and converts it splits it at the commas
+                String[] csv = line.split("[,]+"); // Reads line and converts it splits it at the commas
                 for (i = 0; i < dims; i++) {
                     s[k][i] = csv[i];
                 }
