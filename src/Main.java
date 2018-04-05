@@ -8,22 +8,26 @@ import java.nio.file.Paths;
 
 public class Main {
     private int dims = 6;
+    private String[][] g;
 
     public Main() {
 
     }
 
     public void start() {
-        readFile();
+        g = readFile();
+        Graphs gr = new Graphs();
+        gr.Prims(g);
     }
 
-    public void readFile() {
+    public String[][] readFile() {
+        String[][] s = new String[dims][dims];
         Path f = Paths.get("input/adj_matrix.txt");
         Charset charset = Charset.forName("US-ASCII");
         try (BufferedReader r = Files.newBufferedReader(f, charset)) {
             String line = null;
             int k = 0;
-            String[][] s = new String[dims][dims];
+
             while (((line = r.readLine()) != null) && k < 6) {
                 int i;
                 String[] csv = line.split("[,]+"); // Reads line and converts it splits it at the commas
@@ -45,6 +49,7 @@ public class Main {
         } catch (IOException e) {
             System.err.format("IOException %s%n", e);
         }
+        return s;
     }
 
     public static void main(String[] args) {
