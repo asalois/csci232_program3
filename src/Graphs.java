@@ -9,7 +9,7 @@ public class Graphs {
     public void Prims(int inArray[][]){
         PriorityQueue<String> pQ = new PriorityQueue<String>();
         for(int i = 0; i < inArray.length; i++){
-            for(int j = 0; j < inArray[i].lenght; j++){
+            for(int j = 0; j < inArray[i].length; j++){
                 if(inArray[i][j] != 0){
                     System.out.println(getEdge(i,j));
                 }
