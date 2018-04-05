@@ -1,11 +1,8 @@
-/*
+import java.util.PriorityQueue;
+
 public class Graphs {
 
-    public void Prims(inArray[][]){
-        PriorityQueue<String> pQueue = new PriorityQueue<String>();
-        while(){
-
-        }
+    public void Prims(String inArray[][]){
+        PriorityQueue<String> pQ = new PriorityQueue<String>();
     }
 }
-*/
