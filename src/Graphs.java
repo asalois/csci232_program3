@@ -11,7 +11,8 @@ public class Graphs {
         for (int i = 0; i < inArray.length; i++) {
             for (int j = 0; j < inArray[i].length; j++) {
                 if (inArray[i][j] != 0) {
-                    System.out.println(getEdge(i, j));
+                    String edge = getEdge(i, j);
+                    pQ.add(new Vertex(edge, i, j));
                 }
             }
         }
