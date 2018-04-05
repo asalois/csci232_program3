@@ -7,7 +7,7 @@ public class Graphs {
     }
 
     public void Prims(int inArray[][]) {
-        PriorityQueue<String> pQ = new PriorityQueue<String>();
+        PriorityQueue<Vertex> pQ = new PriorityQueue<Vertex>();
         for (int i = 0; i < inArray.length; i++) {
             for (int j = 0; j < inArray[i].length; j++) {
                 if (inArray[i][j] != 0) {
@@ -22,5 +22,17 @@ public class Graphs {
         String out = alpha.substring(i, i + 1);
         out += alpha.substring(j, j + 1);
         return out;
+    }
+}
+
+class Vertex{
+    public String edge;
+    public int up;
+    public int down;
+
+    public Vertex(String e, int u, int d){
+        edge = e;
+        up = u;
+        down = d;
     }
 }
