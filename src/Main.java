@@ -7,7 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class Main {
-    private int dims = 6;
+    private int dims = 5;
     private int[][] g;
 
     public Main() {
@@ -36,9 +36,21 @@ public class Main {
                 }
                 ++k;
             }
+            System.out.println("   a  b  c   d  e");
             for (int j = 0; j < dims; j++) {
+                if(j == 0)
+                    System.out.print("a ");
+                else if (j == 1)
+                    System.out.print("b ");
+                else if (j == 2)
+                    System.out.print("c ");
+                else if (j == 3)
+                    System.out.print("d ");
+                else if (j == 4){
+                    System.out.print("e ");
+                }
                 for (int m = 0; m < dims; m++) {
-                    System.out.format(" %s ", s[j][m]);
+                    System.out.print(" " + s[j][m]+ " ");
                 }
                 System.out.println();
             }

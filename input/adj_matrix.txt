@@ -1,6 +1,5 @@
- ,a,b,c,d,e,
-a,inf,3,inf,12,8
-b,3,inf,4,inf,inf
-c,inf,4,inf,inf,7
-d,12,inf,inf,inf,inf
-e,8,inf,7,inf,inf
+0,3,0,12,8
+3,0,4,0,0
+0,4,0,0,7
+12,0,0,0,0
+8,0,7,0,0
