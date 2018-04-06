@@ -40,17 +40,24 @@ public class Graphs {
     }
 
     public void Kruskals(int inArray[][]){
-        Edge lastNode= null;
-        PriorityQueue<Edge> pQ = new PriorityQueue<Edge>();
-        for(int i = 0; i < inArray.length; i++){
+        Edge head = null;                                    //memory variable to create linked list
+        PriorityQueue<Edge> pQ = new PriorityQueue<Edge>();     //hold all of the edges
+        for(int i = 0; i < inArray.length; i++){                //finds edges to add to the que
             for(int j = 0; j < inArray[i].length; j++){
                 if (inArray[i][j] != 0) {
                     String edge = getEdge(i, j);
-                    pQ.add(new Edge(edge, i, j, inArray[i][j]));
+                    pQ.add(new Edge(edge, i, j, inArray[i][j]));//
                 }
             }
         }
-        lastNode = pQ.remove();
+        head = pQ.remove();
+        while(pQ.isEmpty() == false){
+            Edge temp = pQ.remove();
+            if(temp == head ){
+
+            }
+        }
+
 
     }
 
