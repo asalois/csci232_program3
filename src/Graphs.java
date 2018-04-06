@@ -51,9 +51,9 @@ public class Graphs {
             }
         }
         head = pQ.remove();
-        while(pQ.isEmpty() == false){
+        while(!pQ.isEmpty()){
             Edge temp = pQ.remove();
-            if(temp == head ){
+            if(temp == head | ){
 
             }
         }
