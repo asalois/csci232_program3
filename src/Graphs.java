@@ -53,9 +53,10 @@ public class Graphs {
         head = pQ.remove();
         while(pQ.isEmpty() == false){
             Edge temp = pQ.remove();
-            if(temp == head ){
-
+            if(!temp.comp(head)){
+                temp.next = head;
             }
+            head = temp;
         }
 
 
@@ -67,12 +68,6 @@ public class Graphs {
 
             }
         }
-        return null;
-    }
-
-    public void FloydWarshalls(int dimension, int[][] inputMatrix){
-        int[][] d = new int[dimension][dimension];                  //Creates a new matrix for manipulation
-        d = inputMatrix;
     }
 }
 
@@ -93,6 +88,16 @@ class Edge implements Comparable<Edge> {
         up = u;
         down = d;
         weight = w;
+    }
+
+    public boolean comp(Edge that){
+        String alt;
+        alt = this.edge.substring(1);
+        alt += this.edge.substring(0,1);
+        if(that.edge.equals(alt) || that.edge.equals(this.edge)){
+            return true;
+        }
+        return false;
     }
 
     public Edge(String s, int u, int d, int w, Edge e) {
