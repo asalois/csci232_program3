@@ -7,12 +7,12 @@ public class Graphs {
     }
 
     public void Prims(int inArray[][]) {
-        PriorityQueue<Vertex> pQ = new PriorityQueue<Vertex>();
+        PriorityQueue<Edge> pQ = new PriorityQueue<Edge>();
         for (int i = 0; i < inArray.length; i++) {
             for (int j = 0; j < inArray[i].length; j++) {
                 if (inArray[i][j] != 0) {
                     String edge = getEdge(i, j);
-                    pQ.add(new Vertex(edge, i, j));
+                    pQ.add(new Edge(edge, i, j, inArray[i][j]));
                 }
             }
         }
@@ -26,14 +26,21 @@ public class Graphs {
     }
 }
 
-class Vertex{
+class Edge implements Comparable<Edge>{
     public String edge;
     public int up;
     public int down;
+    public int weight;
 
-    public Vertex(String e, int u, int d){
+    public int compareTo(Edge that){
+        return (int) this.weight - that.weight;
+    }
+
+
+    public Edge(String e, int u, int d, int w){
         edge = e;
         up = u;
         down = d;
+        weight = w;
     }
 }
