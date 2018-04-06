@@ -45,42 +45,48 @@ public class Graphs {
             for (int j = 0; j < inArray[i].length; j++) {
                 if (inArray[i][j] != 0) {
                     String edge = getEdge(i, j);
-                    pQ.add(new Edge(edge, i, j, inArray[i][j]));//
+                    pQ.add(new Edge(edge, i, j, inArray[i][j]));
                 }
             }
         }
         Edge head = pQ.remove();
+        Edge prev = head;
         char[] vertexes = new char[inArray.length + 1];
         vertexes[0] = head.edge.charAt(0);
         vertexes[1] = head.edge.charAt(1);
         int numvertex = 2;
         boolean vertexA = false, vertexB = false;
-        while (pQ.isEmpty() == false) {
+        while (!pQ.isEmpty()) {
             Edge temp = pQ.remove();
-            if (!temp.comp(head)) {
+            if (!temp.comp(prev)) {
                 for (int i = 0; i < numvertex; i++) {
                     if (temp.edge.charAt(0) == vertexes[i]) {
                         vertexA = true;
-                    } else if (temp.edge.charAt(1) == vertexes[i]) {
+                    }
+                    if (temp.edge.charAt(1) == vertexes[i]) {
                         vertexB = true;
                     }
                 }
                 if (!vertexA || !vertexB) {
-                    temp.next = head;
                     if(!vertexA){
                         vertexes[numvertex] = temp.edge.charAt(0);
+                        System.out.println(vertexes[numvertex] + " 0");
                         numvertex++;
                     }
                     if(!vertexB){
                         vertexes[numvertex] = temp.edge.charAt(1);
+                        System.out.println(vertexes[numvertex] + " 1");
                         numvertex++;
                     }
+                    prev.next = temp;
+                    prev = temp;
                 }
             }
-            head = temp;
+
         }
         while(head.next != null){
             System.out.println(head.edge);
+            head = head.next;
         }
 
 

@@ -17,7 +17,7 @@ public class Main {
     public void start() {
         g = readFile();
         Graphs gr = new Graphs();
-        gr.Prims(g);
+       // gr.Prims(g);
         gr.Kruskals(g);
     }
 
