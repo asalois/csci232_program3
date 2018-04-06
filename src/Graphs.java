@@ -40,14 +40,13 @@ public class Graphs {
     }
 
     public void Kruskals(int inArray[][]){
-        Edge[] forest = new Edge[inArray.length + 1];
+        Edge lastNode= null;
+        PriorityQueue<Edge> pQ = new PriorityQueue<Edge>();
         for(int i = 0; i < inArray.length; i++){
-            Edge lastNode= null;
             for(int j = 0; j < inArray[i].length; j++){
                 if (inArray[i][j] != 0) {
                     String edge = getEdge(i, j);
-                    forest[i] = new Edge(edge, i, j, inArray[i][j], lastNode);
-                    lastNode = forest[i];
+                    pQ.add(new Edge(edge, i, j, inArray[i][j]));
                 }
             }
         }
