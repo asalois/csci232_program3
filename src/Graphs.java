@@ -41,11 +41,13 @@ public class Graphs {
 
     public void Kruskals(int inArray[][]){
         Edge[] forest = new Edge[inArray.length + 1];
+        Edge lastNode= null;
         for(int i = 0; i < inArray.length; i++){
             for(int j = 0; j < inArray[i].length; j++){
                 if (inArray[i][j] != 0) {
                     String edge = getEdge(i, j);
-                    forest[i] = new Edge(edge, i, j, inArray[i][j], forest[i]);
+                    forest[i] = new Edge(edge, i, j, inArray[i][j], lastNode);
+                    lastNode = forest[i];
                 }
             }
         }
@@ -58,6 +60,12 @@ public class Graphs {
 
             }
         }
+        return null;
+    }
+
+    public void FloydWarshalls(int dimension, int[][] inputMatrix){
+        int[][] d = new int[dimension][dimension];                  //Creates a new matrix for manipulation
+        d = inputMatrix;
     }
 }
 
