@@ -1,3 +1,9 @@
+/* Authors: Alex, Ethan, Zan
+ * Date: 04/06/18
+ * Overview: Graph Algorithms Program
+ *   Implementing Prim's, Kruskal's, and Floyd-Warshall's Algorithms
+ */
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
