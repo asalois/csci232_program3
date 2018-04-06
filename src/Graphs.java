@@ -49,17 +49,20 @@ public class Graphs {
                 }
             }
         }
-        Edge head = pQ.remove();
-        Edge prev = head;
+        Edge current = pQ.remove();
+        Edge[] kPath = new Edge[4];
         char[] vertexes = new char[inArray.length + 1];
-        vertexes[0] = head.edge.charAt(0);
-        vertexes[1] = head.edge.charAt(1);
+        vertexes[0] = current.edge.charAt(0);
+        vertexes[1] = current.edge.charAt(1);
+        kPath[0] = current;
         int numvertex = 2;
-        boolean vertexA = false, vertexB = false;
+        int x = 1;
+        boolean vertexA = false;
+        boolean vertexB = false;
         while (!pQ.isEmpty()) {
             Edge temp = pQ.remove();
-            if (!temp.comp(prev)) {
-                System.out.println(temp.edge + " temp");
+            if (!temp.comp(current)) {
+
                 for (int i = 0; i < numvertex; i++) {
                     if (temp.edge.charAt(0) == vertexes[i]) {
                         vertexA = true;
@@ -69,25 +72,27 @@ public class Graphs {
                     }
                 }
                 if (!vertexA || !vertexB) {
+                    System.out.println(temp.edge + " temp");
                     if(!vertexA){
                         vertexes[numvertex] = temp.edge.charAt(0);
-                        System.out.println(vertexes[numvertex] + " 0");
                         numvertex++;
                     }
                     if(!vertexB){
                         vertexes[numvertex] = temp.edge.charAt(1);
-                        System.out.println(vertexes[numvertex] + " 1");
                         numvertex++;
                     }
-                    prev.next = temp;
-                    prev = temp;
+
+                }
+                if (!vertexA || !vertexB) {
+                    kPath[x] = temp;
+                    current = temp;
+                    x++;
                 }
             }
 
         }
-        while(head.next != null){
-            System.out.println(head.edge);
-            head = head.next;
+        for(int z = 0; z < 5; z++){
+            System.out.println(kPath[z].edge);
         }
 
 
