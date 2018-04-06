@@ -10,11 +10,11 @@ public class Graphs {
         PriorityQueue<Edge> pQ = new PriorityQueue<Edge>();
         Edge[] tree = new Edge[25];
         int numTree = 0;
-        for (int i = 0; i < inArray.length-1; i++) {
+        for (int i = 0; i < inArray.length - 1; i++) {
             for (int j = 0; j < inArray[i].length; j++) {
                 if (inArray[i][j] != 0) {
                     String edge = getEdge(i, j);
-                   // System.out.println(edge);
+                    // System.out.println(edge);
                     pQ.add(new Edge(edge, i, j, inArray[i][j]));
                 }
             }
@@ -39,11 +39,11 @@ public class Graphs {
         return out;
     }
 
-    public void Kruskals(int inArray[][]){
+    public void Kruskals(int inArray[][]) {
         Edge head = null;                                    //memory variable to create linked list
         PriorityQueue<Edge> pQ = new PriorityQueue<Edge>();     //hold all of the edges
-        for(int i = 0; i < inArray.length; i++){                //finds edges to add to the que
-            for(int j = 0; j < inArray[i].length; j++){
+        for (int i = 0; i < inArray.length; i++) {                //finds edges to add to the que
+            for (int j = 0; j < inArray[i].length; j++) {
                 if (inArray[i][j] != 0) {
                     String edge = getEdge(i, j);
                     pQ.add(new Edge(edge, i, j, inArray[i][j]));//
@@ -54,28 +54,40 @@ public class Graphs {
         char[] vertexes = new char[inArray.length + 1];
         vertexes[0] = head.edge.charAt(0);
         vertexes[1] = head.edge.charAt(1);
-        while(pQ.isEmpty() == false){
+        int numvertex = 2;
+        boolean vertexA = false, vertexB = false;
+        while (pQ.isEmpty() == false) {
             Edge temp = pQ.remove();
-            if(!temp.comp(head)){
-                if((temp.edge.charAt(0) || temp.edge.charAt(1)) == vertexes[i] )
-                temp.next = head;
+            if (!temp.comp(head)) {
+                for (int i = 0; i < numvertex; i++) {
+                    if (temp.edge.charAt(0) == vertexes[i]) {
+                        vertexA = true;
+                    } else if (temp.edge.charAt(1) == vertexes[i]) {
+                        vertexB = true;
+                    }
+                }
+                if (!vertexA || !vertexB) {
+                    temp.next = head;
+                    if(!vertexA){
+                        vertexes[numvertex] = temp.edge.charAt(0);
+                        numvertex++;
+                    }
+                    if(!vertexB){
+                        vertexes[numvertex] = temp.edge.charAt(1);
+                        numvertex++;
+                    }
+                }
             }
             head = temp;
         }
-
-
-    }
-
-    public Edge findSmall(Edge inArray[] ){
-        for(int i = 0; i < inArray.length; i++){
-            while(inArray[i].next != null){
-
-            }
+        while(head.next != null){
+            System.out.println(head.edge);
         }
-        return null;
+
+
     }
 
-    public void FloydWarshalls(int dimension, int[][] inputMatrix){
+    public void FloydWarshalls(int dimension, int[][] inputMatrix) {
         int[][] d = new int[dimension][dimension];                  //Creates a new matrix for manipulation
         d = inputMatrix;
     }
@@ -92,11 +104,11 @@ class Edge implements Comparable<Edge> {
         return (int) this.weight - that.weight;
     }
 
-    public boolean comp(Edge that){
+    public boolean comp(Edge that) {
         String alt;
         alt = this.edge.substring(1);
-        alt += this.edge.substring(0,1);
-        if(that.edge.equals(alt) || that.edge.equals(this.edge)){
+        alt += this.edge.substring(0, 1);
+        if (that.edge.equals(alt) || that.edge.equals(this.edge)) {
             return true;
         }
         return false;

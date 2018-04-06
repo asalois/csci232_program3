@@ -18,6 +18,7 @@ public class Main {
         g = readFile();
         Graphs gr = new Graphs();
         gr.Prims(g);
+        gr.Kruskals(g);
     }
 
     public int[][] readFile() {
