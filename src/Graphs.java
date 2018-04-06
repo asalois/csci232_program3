@@ -50,6 +50,7 @@ public class Graphs {
                 }
             }
         }
+        lastNode = pQ.remove();
 
     }
 
