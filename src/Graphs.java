@@ -38,6 +38,27 @@ public class Graphs {
         out += alpha.substring(i, i + 1);
         return out;
     }
+
+    public void Kruskals(int inArray[][]){
+        Edge[] forest = new Edge[inArray.length + 1];
+        for(int i = 0; i < inArray.length; i++){
+            for(int j = 0; j < inArray[i].length; j++){
+                if (inArray[i][j] != 0) {
+                    String edge = getEdge(i, j);
+                    forest[i] = new Edge(edge, i, j, inArray[i][j], forest[i]);
+                }
+            }
+        }
+
+    }
+
+    public Edge findSmall(Edge inArray[] ){
+        for(int i = 0; i < inArray.length; i++){
+            while(inArray[i].next != null){
+
+            }
+        }
+    }
 }
 
 class Edge implements Comparable<Edge> {
@@ -45,7 +66,7 @@ class Edge implements Comparable<Edge> {
     public int up;
     public int down;
     public int weight;
-    public boolean inTree;
+    public Edge next;
 
     public int compareTo(Edge that) {
         return (int) this.weight - that.weight;
@@ -57,10 +78,14 @@ class Edge implements Comparable<Edge> {
         up = u;
         down = d;
         weight = w;
-        inTree = false;
     }
 
-    public void toTrue() {
-        inTree = true;
+    public Edge(String s, int u, int d, int w, Edge e) {
+        edge = s;
+        up = u;
+        down = d;
+        weight = w;
+        next = e;
     }
+
 }
