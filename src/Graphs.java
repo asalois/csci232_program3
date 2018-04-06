@@ -51,9 +51,13 @@ public class Graphs {
             }
         }
         head = pQ.remove();
+        char[] vertexes = new char[inArray.length + 1];
+        vertexes[0] = head.edge.charAt(0);
+        vertexes[1] = head.edge.charAt(1);
         while(pQ.isEmpty() == false){
             Edge temp = pQ.remove();
             if(!temp.comp(head)){
+                if((temp.edge.charAt(0) || temp.edge.charAt(1)) == vertexes[i] )
                 temp.next = head;
             }
             head = temp;
