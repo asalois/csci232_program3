@@ -51,11 +51,12 @@ public class Graphs {
             }
         }
         head = pQ.remove();
-        while(!pQ.isEmpty()){
+        while(pQ.isEmpty() == false){
             Edge temp = pQ.remove();
-            if(temp == head | ){
-
+            if(!temp.comp(head)){
+                temp.next = head;
             }
+            head = temp;
         }
 
 
@@ -85,6 +86,16 @@ class Edge implements Comparable<Edge> {
 
     public int compareTo(Edge that) {
         return (int) this.weight - that.weight;
+    }
+
+    public boolean comp(Edge that){
+        String alt;
+        alt = this.edge.substring(1);
+        alt += this.edge.substring(0,1);
+        if(that.edge.equals(alt) || that.edge.equals(this.edge)){
+            return true;
+        }
+        return false;
     }
 
 
