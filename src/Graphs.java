@@ -59,6 +59,7 @@ public class Graphs {
         while (!pQ.isEmpty()) {
             Edge temp = pQ.remove();
             if (!temp.comp(prev)) {
+                System.out.println(temp.edge + " temp");
                 for (int i = 0; i < numvertex; i++) {
                     if (temp.edge.charAt(0) == vertexes[i]) {
                         vertexA = true;
