@@ -8,19 +8,34 @@ public class Graphs {
 
     public void Prims(int inArray[][]) {
         PriorityQueue<Edge> pQ = new PriorityQueue<Edge>();
-        int j = 0;
+        Edge[] tree = new Edge[25];
+        int numTree = 0;
         for (int i = 0; i < inArray.length; i++) {
-            if (inArray[i][j] != 0) {
-                String edge = getEdge(i, j);
-                pQ.add(new Edge(edge, i, j, inArray[i][j]));
+            for (int j = 0; j < inArray[i].length; j++) {
+                if (inArray[i][j] != 0) {
+                    String edge = getEdge(i, j);
+                   // System.out.println(edge);
+                    pQ.add(new Edge(edge, i, j, inArray[i][j]));
+                }
             }
+            tree[numTree] = pQ.remove();
+            inArray[tree[numTree].up][tree[numTree].down] = 0;
+            inArray[tree[numTree].down][tree[numTree].up] = 0;
+            numTree++;
+
         }
+        int i = 0;
+        while (tree[i] != null) {
+            System.out.println(tree[i].edge);
+            i++;
+        }
+
     }
 
-    public String getEdge(int i, int j) {
+    public String getEdge(int j, int i) {
         String alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        String out = alpha.substring(i, i + 1);
-        out += alpha.substring(j, j + 1);
+        String out = alpha.substring(j, j + 1);
+        out += alpha.substring(i, i + 1);
         return out;
     }
 }
@@ -45,7 +60,7 @@ class Edge implements Comparable<Edge> {
         inTree = false;
     }
 
-    public void toTrue(){
+    public void toTrue() {
         inTree = true;
     }
 }
