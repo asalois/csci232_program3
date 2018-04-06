@@ -10,7 +10,7 @@ public class Graphs {
         PriorityQueue<Edge> pQ = new PriorityQueue<Edge>();
         Edge[] tree = new Edge[25];
         int numTree = 0;
-        for (int i = 0; i < inArray.length; i++) {
+        for (int i = 0; i < inArray.length-1; i++) {
             for (int j = 0; j < inArray[i].length; j++) {
                 if (inArray[i][j] != 0) {
                     String edge = getEdge(i, j);
@@ -22,7 +22,7 @@ public class Graphs {
             inArray[tree[numTree].up][tree[numTree].down] = 0;
             inArray[tree[numTree].down][tree[numTree].up] = 0;
             numTree++;
-
+            pQ.clear();
         }
         int i = 0;
         while (tree[i] != null) {
