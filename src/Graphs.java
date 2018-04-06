@@ -40,7 +40,6 @@ public class Graphs {
     }
 
     public void Kruskals(int inArray[][]) {
-        Edge head = null;                                    //memory variable to create linked list
         PriorityQueue<Edge> pQ = new PriorityQueue<Edge>();     //hold all of the edges
         for (int i = 0; i < inArray.length; i++) {                //finds edges to add to the que
             for (int j = 0; j < inArray[i].length; j++) {
@@ -50,7 +49,7 @@ public class Graphs {
                 }
             }
         }
-        head = pQ.remove();
+        Edge head = pQ.remove();
         char[] vertexes = new char[inArray.length + 1];
         vertexes[0] = head.edge.charAt(0);
         vertexes[1] = head.edge.charAt(1);
