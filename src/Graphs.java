@@ -87,9 +87,8 @@ public class Graphs {
                 kPath[x] = temp;
                 x++;
             }
-
-
         }
+
         int i = 0;
         while (kPath[i] != null) {
             System.out.println(kPath[i].edge);
@@ -111,6 +110,10 @@ public class Graphs {
                         }
                     } else if (floyd[i][k] == 0) {
                         if (floyd[j][k] > floyd[j][i] + 99999) {
+                            floyd[j][k] = floyd[j][i] + floyd[i][k];
+                        }
+                    } else if(floyd[j][k] == 0 && j != k){
+                        if(floyd[j][i] != 0 && floyd[i][k] != 0){
                             floyd[j][k] = floyd[j][i] + floyd[i][k];
                         }
                     } else if (floyd[j][k] > floyd[j][i] + floyd[i][k]) {
