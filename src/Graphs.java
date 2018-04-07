@@ -8,20 +8,126 @@ public class Graphs {
 
     public void Prims(int inArray[][]) {
         PriorityQueue<Edge> pQ = new PriorityQueue<Edge>();
-        int j = 0;
-        for (int i = 0; i < inArray.length; i++) {
-            if (inArray[i][j] != 0) {
-                String edge = getEdge(i, j);
-                pQ.add(new Edge(edge, i, j, inArray[i][j]));
+        Edge[] tree = new Edge[25];
+        int numTree = 0;
+        for (int i = 0; i < inArray.length - 1; i++) {
+            for (int j = 0; j < inArray[i].length; j++) {
+                if (inArray[i][j] != 0) {
+                    String edge = getEdge(i, j);
+                    // System.out.println(edge);
+                    pQ.add(new Edge(edge, i, j, inArray[i][j]));
+                }
+            }
+            tree[numTree] = pQ.remove();
+            inArray[tree[numTree].up][tree[numTree].down] = 0;
+            inArray[tree[numTree].down][tree[numTree].up] = 0;
+            numTree++;
+            pQ.clear();
+        }
+        int i = 0;
+        while (tree[i] != null) {
+            System.out.println(tree[i].edge);
+            i++;
+        }
+
+    }
+
+    public String getEdge(int j, int i) {
+        String alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        String out = alpha.substring(j, j + 1);
+        out += alpha.substring(i, i + 1);
+        return out;
+    }
+
+    public void Kruskals(int inArray[][]) {
+        PriorityQueue<Edge> pQ = new PriorityQueue<Edge>();     //hold all of the edges
+        for (int i = 0; i < inArray.length; i++) {                //finds edges to add to the que
+            for (int j = 0; j < inArray[i].length; j++) {
+                if (inArray[i][j] != 0) {
+                    String edge = getEdge(i, j);
+                    pQ.add(new Edge(edge, i, j, inArray[i][j]));
+                }
+            }
+        }
+        Edge current = pQ.remove();
+        Edge[] kPath = new Edge[4];
+        Edge temp;
+        char[] vertexes = new char[inArray.length + 1];
+        vertexes[0] = current.edge.charAt(0);
+        vertexes[1] = current.edge.charAt(1);
+        kPath[0] = current;
+        int numvertex = 2;
+        int x = 1;
+        boolean vertexA = false;
+        boolean vertexB = false;
+        while (!pQ.isEmpty()) {
+            temp = pQ.remove();
+            vertexA = false;
+            vertexB = false;
+            for (int i = 0; i < numvertex; i++) {
+                if (temp.edge.charAt(0) == vertexes[i]) {
+                    vertexA = true;
+                }
+                if (temp.edge.charAt(1) == vertexes[i]) {
+                    vertexB = true;
+                }
+            }
+            if (!vertexA || !vertexB) {
+                if(!vertexA){
+                    vertexes[numvertex] = temp.edge.charAt(0);
+                    numvertex++;
+                }
+                if(!vertexB){
+                    vertexes[numvertex] = temp.edge.charAt(1);
+                    numvertex++;
+                }
+            }
+            if (!vertexA || !vertexB) {
+                kPath[x] = temp;
+                x++;
+            }
+
+
+        }
+        System.out.println();
+        for(int z = 0; z < 4; z++){
+            System.out.println(kPath[z].edge);
+        }
+
+
+    }
+
+    public void FloydWarshalls(int dimension, int[][] inputMatrix) {
+        int[][] floyd;                  //Creates a new matrix for manipulation
+        floyd = inputMatrix;
+        for(int i = 0; i < dimension; i++){
+            for(int j = 0; j < dimension; j++){
+                for(int k = 0; k < dimension; k++){
+                    if(floyd[j][i] == 0){
+                        if(floyd[j][k] > 99999 + floyd[i][k]){
+                            floyd[j][k] = floyd[j][i] + floyd[i][k];
+                        }
+                    }else if(floyd[i][k] == 0){
+                        if(floyd[j][k] > floyd[j][i] + 99999){
+                            floyd[j][k] = floyd[j][i] + floyd[i][k];
+                        }
+                    }else if(floyd[j][k] > floyd[j][i] + floyd[i][k]){
+                        floyd[j][k] = floyd[j][i] + floyd[i][k];
+                    }
+                }
+                printFloyd(dimension, floyd);
             }
         }
     }
 
-    public String getEdge(int i, int j) {
-        String alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        String out = alpha.substring(i, i + 1);
-        out += alpha.substring(j, j + 1);
-        return out;
+    public void printFloyd(int dimension, int[][] floyd){
+        System.out.println();
+        for(int x = 0; x < dimension; x++){
+            for(int y = 0; y < dimension; y++){
+                System.out.print(floyd[x][y] + " ");
+            }
+            System.out.println();
+        }
     }
 }
 
@@ -30,10 +136,20 @@ class Edge implements Comparable<Edge> {
     public int up;
     public int down;
     public int weight;
-    public boolean inTree;
+    public Edge next;
 
     public int compareTo(Edge that) {
         return (int) this.weight - that.weight;
+    }
+
+    public boolean comp(Edge that) {
+        String alt;
+        alt = this.edge.substring(1);
+        alt += this.edge.substring(0, 1);
+        if (that.edge.equals(alt) || that.edge.equals(this.edge)) {
+            return true;
+        }
+        return false;
     }
 
 
@@ -42,10 +158,14 @@ class Edge implements Comparable<Edge> {
         up = u;
         down = d;
         weight = w;
-        inTree = false;
     }
 
-    public void toTrue(){
-        inTree = true;
+    public Edge(String s, int u, int d, int w, Edge e) {
+        edge = s;
+        up = u;
+        down = d;
+        weight = w;
+        next = e;
     }
+
 }
