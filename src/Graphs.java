@@ -51,6 +51,7 @@ public class Graphs {
         }
         Edge current = pQ.remove();
         Edge[] kPath = new Edge[4];
+        Edge temp;
         char[] vertexes = new char[inArray.length + 1];
         vertexes[0] = current.edge.charAt(0);
         vertexes[1] = current.edge.charAt(1);
@@ -60,38 +61,36 @@ public class Graphs {
         boolean vertexA = false;
         boolean vertexB = false;
         while (!pQ.isEmpty()) {
-            Edge temp = pQ.remove();
-            if (!temp.comp(current)) {
-
-                for (int i = 0; i < numvertex; i++) {
-                    if (temp.edge.charAt(0) == vertexes[i]) {
-                        vertexA = true;
-                    }
-                    if (temp.edge.charAt(1) == vertexes[i]) {
-                        vertexB = true;
-                    }
+            temp = pQ.remove();
+            vertexA = false;
+            vertexB = false;
+            for (int i = 0; i < numvertex; i++) {
+                if (temp.edge.charAt(0) == vertexes[i]) {
+                    vertexA = true;
                 }
-                if (!vertexA || !vertexB) {
-                    System.out.println(temp.edge + " temp");
-                    if(!vertexA){
-                        vertexes[numvertex] = temp.edge.charAt(0);
-                        numvertex++;
-                    }
-                    if(!vertexB){
-                        vertexes[numvertex] = temp.edge.charAt(1);
-                        numvertex++;
-                    }
-
-                }
-                if (!vertexA || !vertexB) {
-                    kPath[x] = temp;
-                    current = temp;
-                    x++;
+                if (temp.edge.charAt(1) == vertexes[i]) {
+                    vertexB = true;
                 }
             }
+            if (!vertexA || !vertexB) {
+                if(!vertexA){
+                    vertexes[numvertex] = temp.edge.charAt(0);
+                    numvertex++;
+                }
+                if(!vertexB){
+                    vertexes[numvertex] = temp.edge.charAt(1);
+                    numvertex++;
+                }
+            }
+            if (!vertexA || !vertexB) {
+                kPath[x] = temp;
+                x++;
+            }
+
 
         }
-        for(int z = 0; z < 5; z++){
+        System.out.println();
+        for(int z = 0; z < 4; z++){
             System.out.println(kPath[z].edge);
         }
 
