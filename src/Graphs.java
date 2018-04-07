@@ -98,12 +98,20 @@ public class Graphs {
     }
 
     public void FloydWarshalls(int dimension, int[][] inputMatrix) {
-        int[][] floyd = new int[dimension][dimension];                  //Creates a new matrix for manipulation
+        int[][] floyd;                  //Creates a new matrix for manipulation
         floyd = inputMatrix;
         for(int i = 0; i < dimension; i++){
             for(int j = 0; j < dimension; j++){
                 for(int k = 0; k < dimension; k++){
-                    if(floyd[j][k] > floyd[j][i] + floyd[i][k]){
+                    if(floyd[j][i] == 0){
+                        if(floyd[j][k] > 99999 + floyd[i][k]){
+                            floyd[j][k] = floyd[j][i] + floyd[i][k];
+                        }
+                    }else if(floyd[i][k] == 0){
+                        if(floyd[j][k] > floyd[j][i] + 99999){
+                            floyd[j][k] = floyd[j][i] + floyd[i][k];
+                        }
+                    }else if(floyd[j][k] > floyd[j][i] + floyd[i][k]){
                         floyd[j][k] = floyd[j][i] + floyd[i][k];
                     }
                 }
