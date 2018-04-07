@@ -98,8 +98,28 @@ public class Graphs {
     }
 
     public void FloydWarshalls(int dimension, int[][] inputMatrix) {
-        int[][] d = new int[dimension][dimension];                  //Creates a new matrix for manipulation
-        d = inputMatrix;
+        int[][] floyd = new int[dimension][dimension];                  //Creates a new matrix for manipulation
+        floyd = inputMatrix;
+        for(int i = 0; i < dimension; i++){
+            for(int j = 0; j < dimension; j++){
+                for(int k = 0; k < dimension; k++){
+                    if(floyd[j][k] > floyd[j][i] + floyd[i][k]){
+                        floyd[j][k] = floyd[j][i] + floyd[i][k];
+                    }
+                }
+                printFloyd(dimension, floyd);
+            }
+        }
+    }
+
+    public void printFloyd(int dimension, int[][] floyd){
+        System.out.println();
+        for(int x = 0; x < dimension; x++){
+            for(int y = 0; y < dimension; y++){
+                System.out.print(floyd[x][y] + " ");
+            }
+            System.out.println();
+        }
     }
 }
 
