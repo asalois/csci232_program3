@@ -6,8 +6,9 @@ public class Graphs {
 
     }
 
-    public void Prims(int inArray[][]) {
-        PriorityQueue<Edge> pQ = new PriorityQueue<Edge>();
+    public void Prims(int nArray[][]) {
+        int[][] inArray = nArray.clone();
+        PriorityQueue<Edge> pQ1 = new PriorityQueue<Edge>();
         Edge[] tree = new Edge[25];
         int numTree = 0;
         for (int i = 0; i < inArray.length - 1; i++) {
@@ -15,14 +16,14 @@ public class Graphs {
                 if (inArray[i][j] != 0) {
                     String edge = getEdge(i, j);
                     // System.out.println(edge);
-                    pQ.add(new Edge(edge, i, j, inArray[i][j]));
+                    pQ1.add(new Edge(edge, i, j, inArray[i][j]));
                 }
             }
-            tree[numTree] = pQ.remove();
+            tree[numTree] = pQ1.remove();
             inArray[tree[numTree].up][tree[numTree].down] = 0;
             inArray[tree[numTree].down][tree[numTree].up] = 0;
             numTree++;
-            pQ.clear();
+            pQ1.clear();
         }
         int i = 0;
         while (tree[i] != null) {
@@ -73,11 +74,11 @@ public class Graphs {
                 }
             }
             if (!vertexA || !vertexB) {
-                if(!vertexA){
+                if (!vertexA) {
                     vertexes[numvertex] = temp.edge.charAt(0);
                     numvertex++;
                 }
-                if(!vertexB){
+                if (!vertexB) {
                     vertexes[numvertex] = temp.edge.charAt(1);
                     numvertex++;
                 }
@@ -89,31 +90,30 @@ public class Graphs {
 
 
         }
-        System.out.println();
         int i = 0;
-        while(kPath[i] != null){
+        while (kPath[i] != null) {
             System.out.println(kPath[i].edge);
             i++;
         }
 
-
+        System.out.println();
     }
 
     public void FloydWarshalls(int dimension, int[][] inputMatrix) {
         int[][] floyd;                  //Creates a new matrix for manipulation
         floyd = inputMatrix;
-        for(int i = 0; i < dimension; i++){
-            for(int j = 0; j < dimension; j++){
-                for(int k = 0; k < dimension; k++){
-                    if(floyd[j][i] == 0){
-                        if(floyd[j][k] > 99999 + floyd[i][k]){
+        for (int i = 0; i < dimension; i++) {
+            for (int j = 0; j < dimension; j++) {
+                for (int k = 0; k < dimension; k++) {
+                    if (floyd[j][i] == 0) {
+                        if (floyd[j][k] > 99999 + floyd[i][k]) {
                             floyd[j][k] = floyd[j][i] + floyd[i][k];
                         }
-                    }else if(floyd[i][k] == 0){
-                        if(floyd[j][k] > floyd[j][i] + 99999){
+                    } else if (floyd[i][k] == 0) {
+                        if (floyd[j][k] > floyd[j][i] + 99999) {
                             floyd[j][k] = floyd[j][i] + floyd[i][k];
                         }
-                    }else if(floyd[j][k] > floyd[j][i] + floyd[i][k]){
+                    } else if (floyd[j][k] > floyd[j][i] + floyd[i][k]) {
                         floyd[j][k] = floyd[j][i] + floyd[i][k];
                     }
                 }
@@ -122,10 +122,10 @@ public class Graphs {
         }
     }
 
-    public void printFloyd(int dimension, int[][] floyd){
+    public void printFloyd(int dimension, int[][] floyd) {
         System.out.println();
-        for(int x = 0; x < dimension; x++){
-            for(int y = 0; y < dimension; y++){
+        for (int x = 0; x < dimension; x++) {
+            for (int y = 0; y < dimension; y++) {
                 System.out.print(floyd[x][y] + " ");
             }
             System.out.println();
