@@ -50,7 +50,7 @@ public class Graphs {
             }
         }
         Edge current = pQ.remove();
-        Edge[] kPath = new Edge[4];
+        Edge[] kPath = new Edge[inArray.length];
         Edge temp;
         char[] vertexes = new char[inArray.length + 1];
         vertexes[0] = current.edge.charAt(0);
@@ -90,8 +90,10 @@ public class Graphs {
 
         }
         System.out.println();
-        for(int z = 0; z < 4; z++){
-            System.out.println(kPath[z].edge);
+        int i = 0;
+        while(kPath[i] != null){
+            System.out.println(kPath[i].edge);
+            i++;
         }
 
 

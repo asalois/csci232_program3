@@ -22,10 +22,13 @@ public class Main {
 
     public void start() {
         g = readFile();
+        int[][] p = g.clone();
+        int[][] k = g.clone();
+        int[][] f = g.clone();
         Graphs gr = new Graphs();
-        //gr.Prims(g);
-        //gr.Kruskals(g);
-        gr.FloydWarshalls(5, g);
+        gr.Prims(p);
+        gr.Kruskals(k);
+        gr.FloydWarshalls(5, f);
     }
 
     public int[][] readFile() {
