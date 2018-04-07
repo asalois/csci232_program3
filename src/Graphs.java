@@ -49,52 +49,85 @@ public class Graphs {
                 }
             }
         }
-        Edge head = pQ.remove();
-        Edge prev = head;
+        Edge current = pQ.remove();
+        Edge[] kPath = new Edge[4];
+        Edge temp;
         char[] vertexes = new char[inArray.length + 1];
-        vertexes[0] = head.edge.charAt(0);
-        vertexes[1] = head.edge.charAt(1);
+        vertexes[0] = current.edge.charAt(0);
+        vertexes[1] = current.edge.charAt(1);
+        kPath[0] = current;
         int numvertex = 2;
-        boolean vertexA = false, vertexB = false;
+        int x = 1;
+        boolean vertexA = false;
+        boolean vertexB = false;
         while (!pQ.isEmpty()) {
-            Edge temp = pQ.remove();
-            if (!temp.comp(prev)) {
-                for (int i = 0; i < numvertex; i++) {
-                    if (temp.edge.charAt(0) == vertexes[i]) {
-                        vertexA = true;
-                    }
-                    if (temp.edge.charAt(1) == vertexes[i]) {
-                        vertexB = true;
-                    }
+            temp = pQ.remove();
+            vertexA = false;
+            vertexB = false;
+            for (int i = 0; i < numvertex; i++) {
+                if (temp.edge.charAt(0) == vertexes[i]) {
+                    vertexA = true;
                 }
-                if (!vertexA || !vertexB) {
-                    if(!vertexA){
-                        vertexes[numvertex] = temp.edge.charAt(0);
-                        System.out.println(vertexes[numvertex] + " 0");
-                        numvertex++;
-                    }
-                    if(!vertexB){
-                        vertexes[numvertex] = temp.edge.charAt(1);
-                        System.out.println(vertexes[numvertex] + " 1");
-                        numvertex++;
-                    }
-                    prev.next = temp;
-                    prev = temp;
+                if (temp.edge.charAt(1) == vertexes[i]) {
+                    vertexB = true;
                 }
             }
+            if (!vertexA || !vertexB) {
+                if(!vertexA){
+                    vertexes[numvertex] = temp.edge.charAt(0);
+                    numvertex++;
+                }
+                if(!vertexB){
+                    vertexes[numvertex] = temp.edge.charAt(1);
+                    numvertex++;
+                }
+            }
+            if (!vertexA || !vertexB) {
+                kPath[x] = temp;
+                x++;
+            }
+
 
         }
-        while(head.next != null){
-            System.out.println(head.edge);
-            head = head.next;
+        System.out.println();
+        for(int z = 0; z < 4; z++){
+            System.out.println(kPath[z].edge);
         }
 
 
     }
 
     public void FloydWarshalls(int dimension, int[][] inputMatrix) {
-        int[][] d = new int[dimension][dimension];                  //Creates a new matrix for manipulation
-        d = inputMatrix;
+        int[][] floyd;                  //Creates a new matrix for manipulation
+        floyd = inputMatrix;
+        for(int i = 0; i < dimension; i++){
+            for(int j = 0; j < dimension; j++){
+                for(int k = 0; k < dimension; k++){
+                    if(floyd[j][i] == 0){
+                        if(floyd[j][k] > 99999 + floyd[i][k]){
+                            floyd[j][k] = floyd[j][i] + floyd[i][k];
+                        }
+                    }else if(floyd[i][k] == 0){
+                        if(floyd[j][k] > floyd[j][i] + 99999){
+                            floyd[j][k] = floyd[j][i] + floyd[i][k];
+                        }
+                    }else if(floyd[j][k] > floyd[j][i] + floyd[i][k]){
+                        floyd[j][k] = floyd[j][i] + floyd[i][k];
+                    }
+                }
+                printFloyd(dimension, floyd);
+            }
+        }
+    }
+
+    public void printFloyd(int dimension, int[][] floyd){
+        System.out.println();
+        for(int x = 0; x < dimension; x++){
+            for(int y = 0; y < dimension; y++){
+                System.out.print(floyd[x][y] + " ");
+            }
+            System.out.println();
+        }
     }
 }
 
