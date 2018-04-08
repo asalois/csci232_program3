@@ -81,7 +81,15 @@ public class Graphs {
         }
 
         for(int i = 0; i < kPath.length; i++) {
-            System.out.println(kPath[i].edge);
+            if(i == kPath.length-2){
+                if(kPath[i].weight > kPath[i+1].weight){
+                    System.out.println(kPath[i+1].edge);
+                }else{
+                    System.out.println(kPath[i].edge);
+                }
+                break;
+            }else
+                System.out.println(kPath[i].edge);
         }
 
         System.out.println();
