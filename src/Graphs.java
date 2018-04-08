@@ -29,6 +29,8 @@ public class Graphs {
             System.out.println(tree[count].edge);
             count++;
         }
+        System.out.println();  // to make things look nice
+        System.out.println();
 
     }
 

@@ -21,10 +21,13 @@ public class Main {
     }
 
     public void start() {
+        System.out.println("File 1");
         g = readFile0();
         runall(g);
+        System.out.println("File 2");
         g = readFile1();
         runall(g);
+        System.out.println("File 3");
         g = readFile2();
         runall(g);
 
@@ -38,10 +41,33 @@ public class Main {
         System.out.println("Floyd Warshalls");
         gr.FloydWarshalls(5, f);
         System.out.println("Kruskals");
+        print(k);
         gr.Kruskals(k);
         System.out.println("Prims");
+        print(p);
         gr.Prims(p);
 
+    }
+
+    public void print(int[][] s) {
+        System.out.println("   a  b  c   d  e");
+        for (int j = 0; j < dims; j++) {
+            if (j == 0)
+                System.out.print("a ");
+            else if (j == 1)
+                System.out.print("b ");
+            else if (j == 2)
+                System.out.print("c ");
+            else if (j == 3)
+                System.out.print("d ");
+            else if (j == 4) {
+                System.out.print("e ");
+            }
+            for (int m = 0; m < dims; m++) {
+                System.out.print(" " + s[j][m] + " ");
+            }
+            System.out.println();
+        }
     }
 
     // reads in the three files of the inputs and returns a 2D integer Array
