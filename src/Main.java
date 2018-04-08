@@ -30,19 +30,21 @@ public class Main {
 
     }
 
-    public void runall(int[][] inArray) {
-        int[][] p = inArray.clone();
+    public void runall(int[][] inArray) { // runs all three algos
+        int[][] p = inArray.clone();  // creates copies of the arrays to be fiddled with
         int[][] k = inArray.clone();
         int[][] f = inArray.clone();
-        Graphs gr = new Graphs();
+        Graphs gr = new Graphs();  // creates a new instance of graphs
+        System.out.println("Floyd Warshalls");
         gr.FloydWarshalls(5, f);
         System.out.println("Kruskals");
         gr.Kruskals(k);
         System.out.println("Prims");
-        //gr.Prims(p);
+        gr.Prims(p);
 
     }
 
+    // reads in the three files of the inputs and returns a 2D integer Array
     public int[][] readFile2() {
         int[][] s = new int[dims][dims];
         Path f = Paths.get("input/adj2.txt");
@@ -167,4 +169,3 @@ public class Main {
         new Main().start();
     }
 }
-//zan can push now
