@@ -96,28 +96,28 @@ public class Graphs {
     }
 
     public void FloydWarshalls(int dimension, int[][] inputMatrix) {
-        int[][] floyd;                  //Creates a new matrix for manipulation
-        floyd = inputMatrix;
-        for (int i = 0; i < dimension; i++) {
-            for (int j = 0; j < dimension; j++) {
-                for (int k = 0; k < dimension; k++) {
-                    if (floyd[j][i] == 0) {
-                        if (floyd[j][k] > 99999 + floyd[i][k]) {
-                            floyd[j][k] = floyd[j][i] + floyd[i][k];
+        int[][] floyd;                                                  //Creates a new matrix for manipulation
+        floyd = inputMatrix;                                            //fills new matrix with original date
+        for (int i = 0; i < dimension; i++) {                           //picks a middle vertex
+            for (int j = 0; j < dimension; j++) {                       //picks a left vertex
+                for (int k = 0; k < dimension; k++) {                   //picks a right vertex
+                    if (floyd[j][i] == 0) {                             //if left vertex is a 0 input make it's value large to simulate infinite connection length
+                        if (floyd[j][k] > 99999 + floyd[i][k]) {        //check to see if alternate path is shorter then current path
+                            floyd[j][k] = floyd[j][i] + floyd[i][k];    //set path to the alternate
                         }
-                    } else if (floyd[i][k] == 0) {
-                        if (floyd[j][k] > floyd[j][i] + 99999) {
-                            floyd[j][k] = floyd[j][i] + floyd[i][k];
+                    } else if (floyd[i][k] == 0) {                      //if right vertex is a 0 input make it's value large to simulate infinite connection length
+                        if (floyd[j][k] > floyd[j][i] + 99999) {        //check to see if alternate path is shorter then current path
+                            floyd[j][k] = floyd[j][i] + floyd[i][k];    //set path to the alternate
                         }
-                    } else if (floyd[j][k] == 0 && j != k) {
-                        if (floyd[j][i] != 0 && floyd[i][k] != 0) {
-                            floyd[j][k] = floyd[j][i] + floyd[i][k];
+                    } else if (floyd[j][k] == 0 && j != k) {            //if there is no connection between two points give it a path with in between i
+                        if (floyd[j][i] != 0 && floyd[i][k] != 0) {     //make sure connections are available
+                            floyd[j][k] = floyd[j][i] + floyd[i][k];    //set path to the alternate
                         }
-                    } else if (floyd[j][k] > floyd[j][i] + floyd[i][k]) {
-                        floyd[j][k] = floyd[j][i] + floyd[i][k];
+                    } else if (floyd[j][k] > floyd[j][i] + floyd[i][k]){//if path through in between i is shorter then direct j to k
+                        floyd[j][k] = floyd[j][i] + floyd[i][k];        //set path to the alternate
                     }
                 }
-                printFloyd(dimension, floyd);
+                printFloyd(dimension, floyd);                           //print after each change
             }
         }
     }
