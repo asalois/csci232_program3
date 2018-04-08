@@ -53,46 +53,35 @@ public class Graphs {
         Edge current = pQ.remove();
         Edge[] kPath = new Edge[inArray.length];
         Edge temp;
-        char[] vertexes = new char[inArray.length + 1];
-        vertexes[0] = current.edge.charAt(0);
-        vertexes[1] = current.edge.charAt(1);
+        Edge[] vertexes = new Edge[pQ.size()+2];
+        vertexes[0] = current;
         kPath[0] = current;
-        int numvertex = 2;
+        int numvertex = 1;
         int x = 1;
-        boolean vertexA = false;
-        boolean vertexB = false;
         while (!pQ.isEmpty()) {
+            boolean inVert = false;
             temp = pQ.remove();
-            vertexA = false;
-            vertexB = false;
             for (int i = 0; i < numvertex; i++) {
-                if (temp.edge.charAt(0) == vertexes[i]) {
-                    vertexA = true;
-                }
-                if (temp.edge.charAt(1) == vertexes[i]) {
-                    vertexB = true;
-                }
-            }
-            if (!vertexA || !vertexB) {
-                if (!vertexA) {
-                    vertexes[numvertex] = temp.edge.charAt(0);
-                    numvertex++;
-                }
-                if (!vertexB) {
-                    vertexes[numvertex] = temp.edge.charAt(1);
-                    numvertex++;
+                if (vertexes[i] != null) {
+                    if (temp.comp(vertexes[i])) {
+                       inVert = true;
+                       break;
+                    }
                 }
             }
-            if (!vertexA || !vertexB) {
+            if(!inVert){
                 kPath[x] = temp;
                 x++;
+                if(x == inArray.length){
+                    break;
+                }
             }
+            vertexes[numvertex] = temp;
+            ++numvertex;
         }
 
-        int i = 0;
-        while (kPath[i] != null) {
+        for(int i = 0; i < kPath.length; i++) {
             System.out.println(kPath[i].edge);
-            i++;
         }
 
         System.out.println();
@@ -112,8 +101,8 @@ public class Graphs {
                         if (floyd[j][k] > floyd[j][i] + 99999) {
                             floyd[j][k] = floyd[j][i] + floyd[i][k];
                         }
-                    } else if(floyd[j][k] == 0 && j != k){
-                        if(floyd[j][i] != 0 && floyd[i][k] != 0){
+                    } else if (floyd[j][k] == 0 && j != k) {
+                        if (floyd[j][i] != 0 && floyd[i][k] != 0) {
                             floyd[j][k] = floyd[j][i] + floyd[i][k];
                         }
                     } else if (floyd[j][k] > floyd[j][i] + floyd[i][k]) {

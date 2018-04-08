@@ -21,12 +21,12 @@ public class Main {
     }
 
     public void start() {
-        g = readFile0();
-        runall(g);
-        g = readFile1();
-        runall(g);
-        g = readFile2();
-        runall(g);
+       g = readFile0();
+       runall(g);
+       g = readFile1();
+       runall(g);
+       g = readFile2();
+       runall(g);
 
     }
 
@@ -35,10 +35,10 @@ public class Main {
         int[][] k = inArray.clone();
         int[][] f = inArray.clone();
         Graphs gr = new Graphs();
-        gr.FloydWarshalls(5, f);
+        //gr.FloydWarshalls(5, f);
         System.out.println("Kruskals");
         gr.Kruskals(k);
-        System.out.println("Prims");
+        //System.out.println("Prims");
         //gr.Prims(p);
 
     }
