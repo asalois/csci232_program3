@@ -134,14 +134,14 @@ public class Graphs {
 
 }
 
-class Edge implements Comparable<Edge> {
+class Edge implements Comparable<Edge> { // is class to hold details about an edge
     public String edge;
     public int up;
     public int down;
     public int weight;
     public Edge next;
 
-    public int compareTo(Edge that) {
+    public int compareTo(Edge that) { // used for the  sorting of the priority que
         return (int) this.weight - that.weight;
     }
 
@@ -156,7 +156,7 @@ class Edge implements Comparable<Edge> {
     }
 
 
-    public Edge(String e, int u, int d, int w) {
+    public Edge(String e, int u, int d, int w) { // constructor for edge
         edge = e;
         up = u;
         down = d;
