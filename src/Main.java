@@ -22,12 +22,6 @@ public class Main {
     }
 
     public void start() {
-       g = readFile0();
-       runall(g);
-       g = readFile1();
-       runall(g);
-       g = readFile2();
-       runall(g);
 
     }
 

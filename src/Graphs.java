@@ -42,7 +42,7 @@ public class Graphs {
 
     public void Kruskals(int inArray[][]) {
         PriorityQueue<Edge> pQ = new PriorityQueue<Edge>();     //hold all of the edges
-        for (int i = 0; i < inArray.length; i++) {                //finds edges to add to the que
+        for (int i = 0; i < inArray.length; i++) {                //finds edges to add to the queue
             for (int j = 0; j < inArray[i].length; j++) {
                 if (inArray[i][j] != 0) {
                     String edge = getEdge(i, j);
@@ -50,11 +50,11 @@ public class Graphs {
                 }
             }
         }
-        Edge current = pQ.remove();
-        Edge[] kPath = new Edge[inArray.length];
+        Edge current = pQ.remove(); // removes the first edge from the queue to begin checks
+        Edge[] kPath = new Edge[inArray.length]; // initializes path array with a size equal to the number of vertices
         Edge temp;
-        Edge[] vertexes = new Edge[pQ.size()+2];
-        vertexes[0] = current;
+        Edge[] vertexes = new Edge[pQ.size()+2]; // holds all vertices removed from the queue, used for checks when adding to kPath
+        vertexes[0] = current; // Adds current
         kPath[0] = current;
         int numvertex = 1;
         int x = 1;
