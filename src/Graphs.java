@@ -7,38 +7,40 @@ public class Graphs {
     }
 
     public void Prims(int nArray[][]) {
-        int[][] inArray = nArray.clone();
-        PriorityQueue<Edge> pQ1 = new PriorityQueue<Edge>();
-        Edge[] tree = new Edge[25];
-        int numTree = 0;
-        for (int i = 0; i < inArray.length - 1; i++) {
-            for (int j = 0; j < inArray[i].length; j++) {
-                if (inArray[i][j] != 0) {
-                    String edge = getEdge(i, j);
-                    // System.out.println(edge);
-                    pQ1.add(new Edge(edge, i, j, inArray[i][j]));
+        int[][] inArray = nArray.clone();  // an array to use with out
+        PriorityQueue<Edge> pQ1 = new PriorityQueue<Edge>();  // create a priority que of type Edge and sorted by weight
+        Edge[] tree = new Edge[inArray.length];  //  an array of edges to hold the edges foe the output
+        int numTree = 0;  //  number of edges in the tree
+        for (int i = 0; i < inArray.length - 1; i++) {  // the last vertex does not need to be used as it will already be connected
+            for (int j = 0; j < inArray[i].length; j++) { // double for loop to look through entire matrix
+                if (inArray[i][j] != 0) {  // if the weight is not 0 or empty
+                    String edge = getEdge(i, j);  // gets the edge as a string
+                    pQ1.add(new Edge(edge, i, j, inArray[i][j]));  //  creates an edge and then adds to the que
                 }
             }
-            tree[numTree] = pQ1.remove();
-            inArray[tree[numTree].up][tree[numTree].down] = 0;
-            inArray[tree[numTree].down][tree[numTree].up] = 0;
-            numTree++;
-            pQ1.clear();
+            tree[numTree] = pQ1.remove();  // pop the first one on the que
+            inArray[tree[numTree].up][tree[numTree].down] = 0;  // zero out and replace the edge popped
+            inArray[tree[numTree].down][tree[numTree].up] = 0;  // make sure to remove in both places
+            numTree++; // keep track of how many in the tree
+            pQ1.clear(); // clean the que and start over for the next vertex
         }
-        int i = 0;
-        while (tree[i] != null) {
-            System.out.println(tree[i].edge);
-            i++;
+        int count = 0;  //  integer to go through tree array
+        while (tree[count] != null) { // print the tree array until there is nothing to print
+            System.out.println(tree[count].edge);
+            count++;
         }
+        System.out.println();  // to make things look nice
+        System.out.println();
 
     }
 
-    public String getEdge(int j, int i) {
-        String alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        String out = alpha.substring(j, j + 1);
-        out += alpha.substring(i, i + 1);
+    public String getEdge(int j, int i) { // returns a string of the edge
+        String alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";  //  all the alphabet to grab use
+        String out = alpha.substring(j, j + 1);  // grab the first vertex in the matrix give it the corresponding letter
+        out += alpha.substring(i, i + 1);  // add the next to letter the string
         return out;
     }
+
 
     public void Kruskals(int inArray[][]) {
         PriorityQueue<Edge> pQ = new PriorityQueue<Edge>();     //hold all of the edges
@@ -92,8 +94,7 @@ public class Graphs {
                 System.out.println(kPath[i].edge);
         }
 
-        System.out.println();
-    }
+
 
     public void FloydWarshalls(int dimension, int[][] inputMatrix) {
         int[][] floyd;                                                  //Creates a new matrix for manipulation
