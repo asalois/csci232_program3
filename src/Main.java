@@ -2,6 +2,7 @@
  * Date: 04/06/18
  * Overview: Graph Algorithms Program
  *   Implementing Prim's, Kruskal's, and Floyd-Warshall's Algorithms
+ *   For input files no connection between vertexes should be symbolized by a zero
  */
 
 import java.io.BufferedReader;

@@ -42,30 +42,82 @@ public class Graphs {
     }
 
 
-
-    public void FloydWarshalls(int dimension, int[][] inputMatrix) {
-        int[][] floyd;                  //Creates a new matrix for manipulation
-        floyd = inputMatrix;
-        for (int i = 0; i < dimension; i++) {
-            for (int j = 0; j < dimension; j++) {
-                for (int k = 0; k < dimension; k++) {
-                    if (floyd[j][i] == 0) {
-                        if (floyd[j][k] > 99999 + floyd[i][k]) {
-                            floyd[j][k] = floyd[j][i] + floyd[i][k];
-                        }
-                    } else if (floyd[i][k] == 0) {
-                        if (floyd[j][k] > floyd[j][i] + 99999) {
-                            floyd[j][k] = floyd[j][i] + floyd[i][k];
-                        }
-                    } else if (floyd[j][k] == 0 && j != k) {
-                        if (floyd[j][i] != 0 && floyd[i][k] != 0) {
-                            floyd[j][k] = floyd[j][i] + floyd[i][k];
-                        }
-                    } else if (floyd[j][k] > floyd[j][i] + floyd[i][k]) {
-                        floyd[j][k] = floyd[j][i] + floyd[i][k];
+    public void Kruskals(int inArray[][]) {
+        PriorityQueue<Edge> pQ = new PriorityQueue<Edge>();     //hold all of the edges
+        for (int i = 0; i < inArray.length; i++) {                //finds edges to add to the queue
+            for (int j = 0; j < inArray[i].length; j++) {
+                if (inArray[i][j] != 0) {
+                    String edge = getEdge(i, j);
+                    pQ.add(new Edge(edge, i, j, inArray[i][j]));
+                }
+            }
+        }
+        Edge current = pQ.remove(); // removes the first edge from the queue to begin checks
+        Edge[] kPath = new Edge[inArray.length]; // initializes path array with a size equal to the number of vertices
+        Edge temp;
+        Edge[] vertexes = new Edge[pQ.size() + 2]; // holds all vertices removed from the queue, used for checks when adding to kPath
+        vertexes[0] = current; // Adds current
+        kPath[0] = current;
+        int numvertex = 1;
+        int x = 1;
+        while (!pQ.isEmpty()) {
+            boolean inVert = false;
+            temp = pQ.remove();
+            for (int i = 0; i < numvertex; i++) {
+                if (vertexes[i] != null) {
+                    if (temp.comp(vertexes[i])) {
+                        inVert = true;
+                        break;
                     }
                 }
-                printFloyd(dimension, floyd);
+            }
+            if (!inVert) {
+                kPath[x] = temp;
+                x++;
+                if (x == inArray.length) {
+                    break;
+                }
+            }
+            vertexes[numvertex] = temp;
+            ++numvertex;
+        }
+
+        for (int i = 0; i < kPath.length; i++) {
+            if (i == kPath.length - 2) {
+                if (kPath[i].weight > kPath[i + 1].weight) {
+                    System.out.println(kPath[i + 1].edge);
+                } else {
+                    System.out.println(kPath[i].edge);
+                }
+                break;
+            } else
+                System.out.println(kPath[i].edge);
+        }
+    }
+
+    public void FloydWarshalls(int dimension, int[][] inputMatrix) {
+        int[][] floyd;                                                  //Creates a new matrix for manipulation
+        floyd = inputMatrix;                                            //fills new matrix with original date
+        for (int i = 0; i < dimension; i++) {                           //picks a middle vertex
+            for (int j = 0; j < dimension; j++) {                       //picks a left vertex
+                for (int k = 0; k < dimension; k++) {                   //picks a right vertex
+                    if (floyd[j][i] == 0) {                             //if left vertex is a 0 input make it's value large to simulate infinite connection length
+                        if (floyd[j][k] > 99999 + floyd[i][k]) {        //check to see if alternate path is shorter then current path
+                            floyd[j][k] = floyd[j][i] + floyd[i][k];    //set path to the alternate
+                        }
+                    } else if (floyd[i][k] == 0) {                      //if right vertex is a 0 input make it's value large to simulate infinite connection length
+                        if (floyd[j][k] > floyd[j][i] + 99999) {        //check to see if alternate path is shorter then current path
+                            floyd[j][k] = floyd[j][i] + floyd[i][k];    //set path to the alternate
+                        }
+                    } else if (floyd[j][k] == 0 && j != k) {            //if there is no connection between two points give it a path with in between i
+                        if (floyd[j][i] != 0 && floyd[i][k] != 0) {     //make sure connections are available
+                            floyd[j][k] = floyd[j][i] + floyd[i][k];    //set path to the alternate
+                        }
+                    } else if (floyd[j][k] > floyd[j][i] + floyd[i][k]) {//if path through in between i is shorter then direct j to k
+                        floyd[j][k] = floyd[j][i] + floyd[i][k];        //set path to the alternate
+                    }
+                }
+                printFloyd(dimension, floyd);                           //print after each change
             }
         }
     }
@@ -79,6 +131,7 @@ public class Graphs {
             System.out.println();
         }
     }
+
 }
 
 class Edge implements Comparable<Edge> {
@@ -119,3 +172,4 @@ class Edge implements Comparable<Edge> {
     }
 
 }
+
