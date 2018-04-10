@@ -3,6 +3,11 @@
  * Overview: Graph Algorithms Program
  *   Implementing Prim's, Kruskal's, and Floyd-Warshall's Algorithms
  *   For input files no connection between vertexes should be symbolized by a zero
+ *   Additional notes for graph formatting:
+ *      our program can only accept 5x5 adjacency tables (only 5 vertex graphs)
+ *      the adjacency table can only contain numbers (no letters for vertex names)
+ *      for an example, check one of our provided adjacency table files (adj1, adj2, or adj_matrix)
+ *      when you test this, if you use a custom adjacency table, due to our implementation, please modify one of the files named above
  */
 
 import java.io.BufferedReader;
