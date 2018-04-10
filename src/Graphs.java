@@ -56,25 +56,25 @@ public class Graphs {
         Edge[] kPath = new Edge[inArray.length]; // initializes path array with a size equal to the number of vertices
         Edge temp;
         Edge[] vertexes = new Edge[pQ.size() + 2]; // holds all vertices removed from the queue, used for checks when adding to kPath
-        vertexes[0] = current; // Adds current
+        vertexes[0] = current; // Adds current to the vertex array and kPath
         kPath[0] = current;
         int numvertex = 1;
         int x = 1;
-        while (!pQ.isEmpty()) {
+        while (!pQ.isEmpty()) { // Removes the first item in the priority queue, checks to see if it's already in vertexes or kPath
             boolean inVert = false;
             temp = pQ.remove();
             for (int i = 0; i < numvertex; i++) {
                 if (vertexes[i] != null) {
-                    if (temp.comp(vertexes[i])) {
+                    if (temp.comp(vertexes[i])) { // Breaks the for loop if current is already in vertexes
                         inVert = true;
                         break;
                     }
                 }
             }
-            if (!inVert) {
+            if (!inVert) { // If current isn't already in vertexes, it is added to kPath
                 kPath[x] = temp;
                 x++;
-                if (x == inArray.length) {
+                if (x == inArray.length) { // Breaks the while loop once kPath is full
                     break;
                 }
             }
@@ -82,7 +82,7 @@ public class Graphs {
             ++numvertex;
         }
 
-        for (int i = 0; i < kPath.length; i++) {
+        for (int i = 0; i < kPath.length; i++) { // Iterates through kPath, prints the first n-1 values
             if (i == kPath.length - 2) {
                 if (kPath[i].weight > kPath[i + 1].weight) {
                     System.out.println(kPath[i + 1].edge);
@@ -145,7 +145,7 @@ class Edge implements Comparable<Edge> {
         return (int) this.weight - that.weight;
     }
 
-    public boolean comp(Edge that) {
+    public boolean comp(Edge that) { // Compares the name of an edge, flips the order of the name to compare both possible names
         String alt;
         alt = this.edge.substring(1);
         alt += this.edge.substring(0, 1);
@@ -161,14 +161,6 @@ class Edge implements Comparable<Edge> {
         up = u;
         down = d;
         weight = w;
-    }
-
-    public Edge(String s, int u, int d, int w, Edge e) {
-        edge = s;
-        up = u;
-        down = d;
-        weight = w;
-        next = e;
     }
 
 }
