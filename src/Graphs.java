@@ -41,63 +41,7 @@ public class Graphs {
         return out;
     }
 
-    public void Kruskals(int inArray[][]) {
-        PriorityQueue<Edge> pQ = new PriorityQueue<Edge>();     //hold all of the edges
-        for (int i = 0; i < inArray.length; i++) {                //finds edges to add to the que
-            for (int j = 0; j < inArray[i].length; j++) {
-                if (inArray[i][j] != 0) {
-                    String edge = getEdge(i, j);
-                    pQ.add(new Edge(edge, i, j, inArray[i][j]));
-                }
-            }
-        }
-        Edge current = pQ.remove();
-        Edge[] kPath = new Edge[inArray.length];
-        Edge temp;
-        char[] vertexes = new char[inArray.length + 1];
-        vertexes[0] = current.edge.charAt(0);
-        vertexes[1] = current.edge.charAt(1);
-        kPath[0] = current;
-        int numvertex = 2;
-        int x = 1;
-        boolean vertexA = false;
-        boolean vertexB = false;
-        while (!pQ.isEmpty()) {
-            temp = pQ.remove();
-            vertexA = false;
-            vertexB = false;
-            for (int i = 0; i < numvertex; i++) {
-                if (temp.edge.charAt(0) == vertexes[i]) {
-                    vertexA = true;
-                }
-                if (temp.edge.charAt(1) == vertexes[i]) {
-                    vertexB = true;
-                }
-            }
-            if (!vertexA || !vertexB) {
-                if (!vertexA) {
-                    vertexes[numvertex] = temp.edge.charAt(0);
-                    numvertex++;
-                }
-                if (!vertexB) {
-                    vertexes[numvertex] = temp.edge.charAt(1);
-                    numvertex++;
-                }
-            }
-            if (!vertexA || !vertexB) {
-                kPath[x] = temp;
-                x++;
-            }
-        }
 
-        int i = 0;
-        while (kPath[i] != null) {
-            System.out.println(kPath[i].edge);
-            i++;
-        }
-
-        System.out.println();
-    }
 
     public void FloydWarshalls(int dimension, int[][] inputMatrix) {
         int[][] floyd;                  //Creates a new matrix for manipulation
