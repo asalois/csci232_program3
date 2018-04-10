@@ -155,7 +155,6 @@ class Edge implements Comparable<Edge> { // is class to hold details about an ed
         return false;
     }
 
-
     public Edge(String e, int u, int d, int w) { // constructor for edge
         edge = e;
         up = u;

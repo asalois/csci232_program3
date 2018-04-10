@@ -1,4 +1,4 @@
-/* Authors: Alex, Ethan, Zan
+/* Authors: Alex Salois, Ethan Fison, Zan Rost-Montieth
  * Date: 04/06/18
  * Overview: Graph Algorithms Program
  *   Implementing Prim's, Kruskal's, and Floyd-Warshall's Algorithms
