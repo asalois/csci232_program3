@@ -17,7 +17,7 @@ public class Main {
     private int[][] g;
 
     public Main() {
-
+        System.out.println();
     }
 
     public void start() {
