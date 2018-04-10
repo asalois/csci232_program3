@@ -55,7 +55,7 @@ public class Graphs {
         Edge current = pQ.remove(); // removes the first edge from the queue to begin checks
         Edge[] kPath = new Edge[inArray.length]; // initializes path array with a size equal to the number of vertices
         Edge temp;
-        Edge[] vertexes = new Edge[pQ.size()+2]; // holds all vertices removed from the queue, used for checks when adding to kPath
+        Edge[] vertexes = new Edge[pQ.size() + 2]; // holds all vertices removed from the queue, used for checks when adding to kPath
         vertexes[0] = current; // Adds current
         kPath[0] = current;
         int numvertex = 1;
@@ -66,15 +66,15 @@ public class Graphs {
             for (int i = 0; i < numvertex; i++) {
                 if (vertexes[i] != null) {
                     if (temp.comp(vertexes[i])) {
-                       inVert = true;
-                       break;
+                        inVert = true;
+                        break;
                     }
                 }
             }
-            if(!inVert){
+            if (!inVert) {
                 kPath[x] = temp;
                 x++;
-                if(x == inArray.length){
+                if (x == inArray.length) {
                     break;
                 }
             }
@@ -82,19 +82,18 @@ public class Graphs {
             ++numvertex;
         }
 
-        for(int i = 0; i < kPath.length; i++) {
-            if(i == kPath.length-2){
-                if(kPath[i].weight > kPath[i+1].weight){
-                    System.out.println(kPath[i+1].edge);
-                }else{
+        for (int i = 0; i < kPath.length; i++) {
+            if (i == kPath.length - 2) {
+                if (kPath[i].weight > kPath[i + 1].weight) {
+                    System.out.println(kPath[i + 1].edge);
+                } else {
                     System.out.println(kPath[i].edge);
                 }
                 break;
-            }else
+            } else
                 System.out.println(kPath[i].edge);
         }
-
-
+    }
 
     public void FloydWarshalls(int dimension, int[][] inputMatrix) {
         int[][] floyd;                                                  //Creates a new matrix for manipulation
@@ -114,7 +113,7 @@ public class Graphs {
                         if (floyd[j][i] != 0 && floyd[i][k] != 0) {     //make sure connections are available
                             floyd[j][k] = floyd[j][i] + floyd[i][k];    //set path to the alternate
                         }
-                    } else if (floyd[j][k] > floyd[j][i] + floyd[i][k]){//if path through in between i is shorter then direct j to k
+                    } else if (floyd[j][k] > floyd[j][i] + floyd[i][k]) {//if path through in between i is shorter then direct j to k
                         floyd[j][k] = floyd[j][i] + floyd[i][k];        //set path to the alternate
                     }
                 }
@@ -132,6 +131,7 @@ public class Graphs {
             System.out.println();
         }
     }
+
 }
 
 class Edge implements Comparable<Edge> {
@@ -172,3 +172,4 @@ class Edge implements Comparable<Edge> {
     }
 
 }
+
